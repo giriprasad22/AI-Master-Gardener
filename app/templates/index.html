@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Gardener</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="appbar">
+    <div class="bar-left">
+      <button id="btn-toggle-sidebar" class="btn-ghost" title="Toggle history">☰</button>
+      <div class="brand-dot"></div>
+      <h1>🌱 AI Master Gardener</h1>
+    </div>
+    <div class="bar-right">
+      <a href="/about" class="btn-ghost" title="Learn about AI Master Gardener">ℹ️ About</a>
+      <button id="btn-newchat" class="btn-ghost">New chat</button>
+    </div>
+  </header>
+  <main class="chat-shell">
+    <aside class="chat-sidebar">
+      <div class="sb-head">
+        <div class="sb-title">🌿 Garden Chats</div>
+        <button id="sb-new" class="sb-new-btn" title="New chat">🌱 New Chat</button>
+      </div>
+      <ul id="sb-threads" class="sb-list"></ul>
+    </aside>
+    <section class="chat-main">
+      <div id="ch-messages" class="messages"></div>
+      <div id="ch-suggestions" class="suggestions"></div>
+      <div id="ch-attach-preview" class="attach-preview"></div>
+      <div class="chat-inputbar">
+  <textarea id="ch-input" rows="1" placeholder="🌱 Ask about crops, diseases, companions, yield… (Images are analyzed by classifiers, gemma3 summarizes) (Enter to send)"></textarea>
+        <div class="chat-actions">
+          <button id="ch-send">Send</button>
+          <button id="ch-tools" class="btn-ghost" title="Tools">⋯</button>
+          <button id="ch-camera" class="btn-ghost" title="Camera">📷</button>
+          <button id="ch-clear" class="btn-ghost">Clear</button>
+          <div id="tools-menu" class="tools-menu" aria-hidden="true">
+            <div class="tools-head">
+              <span>Quick actions</span>
+              <button id="tools-close" class="btn-ghost" aria-label="Close">✕</button>
+            </div>
+            <button class="tools-item" data-go="analyze">🔍 Disease Detection</button>
+            <button class="tools-item" data-go="analyze">🌾 Crop Recognition</button>
+            <button class="tools-item" data-go="yield">📊 Yield Forecasting</button>
+            <button class="tools-item" data-go="companions">🤝 Companion Planting</button>
+          </div>
+          <div id="camera-menu" class="camera-menu" aria-hidden="true">
+            <div class="tools-head">
+              <span>📸 Add image</span>
+              <button id="camera-close" class="btn-ghost" aria-label="Close">✕</button>
+            </div>
+            <button class="tools-item" id="cam-take">📷 Take photo with camera</button>
+            <button class="tools-item" id="cam-upload-btn">📁 Upload from device</button>
+          </div>
+          <input id="cam-capture" class="hidden-input" type="file" accept="image/*" capture="environment" />
+          <input id="cam-upload" class="hidden-input" type="file" accept="image/*" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Pages Backdrop -->
+    <div class="page-backdrop hidden" id="page-backdrop"></div>
+    
+    <!-- Sidebar Mobile Backdrop -->
+    <div class="sidebar-backdrop hidden" id="sidebar-backdrop"></div>
+
+    <!-- Camera Modal -->
+    <div class="camera-modal hidden" id="camera-modal">
+      <div class="camera-container">
+        <div class="camera-header">
+          <h3>📷 Camera Capture</h3>
+          <button id="camera-modal-close" class="btn-ghost">✕</button>
+        </div>
+        <div class="camera-viewport">
+          <video id="camera-video" autoplay playsinline></video>
+          <canvas id="camera-canvas" class="hidden"></canvas>
+        </div>
+        <div class="camera-controls">
+          <button id="camera-capture-btn" class="btn-primary">📸 Capture Photo</button>
+          <button id="camera-switch-btn" class="btn-ghost">🔄 Switch Camera</button>
+        </div>
+        <div class="camera-preview hidden" id="camera-preview">
+          <img id="camera-preview-img" alt="Captured photo">
+          <div class="camera-preview-controls">
+            <button id="camera-retake-btn" class="btn-ghost">↩️ Retake</button>
+            <button id="camera-use-btn" class="btn-primary">✅ Use Photo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Analyze -->
+    <section class="page hidden" id="page-analyze">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2 style="margin: 0;">Analyze Plant</h2>
+          <button class="btn-ghost page-close" data-page="analyze" title="Close">✕</button>
+        </div>
+        <div class="stack">
+          <div>
+            <label class="label">Upload image</label>
+            <input id="an-image" type="file" accept="image/*" />
+            <div class="preview" id="an-preview"></div>
+          </div>
+          <div>
+            <button id="an-run">Diagnose</button>
+          </div>
+        </div>
+      </div>
+      <div class="card muted">
+        <h3>Results</h3>
+        <div id="an-results" class="stack"></div>
+      </div>
+    </section>
+
+    <!-- Companions -->
+    <section class="page hidden" id="page-companions">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2 style="margin: 0;">Companion Planner</h2>
+          <button class="btn-ghost page-close" data-page="companions" title="Close">✕</button>
+        </div>
+        <div class="row">
+          <input id="cp-plant" type="text" placeholder="Type a plant name (e.g., tomato)" />
+          <button id="cp-suggest">Suggest</button>
+        </div>
+      </div>
+      <div class="card muted">
+        <h3>Suggestions</h3>
+        <div id="cp-suggestions" class="tags"></div>
+      </div>
+    </section>
+
+    <!-- Yield -->
+    <section class="page hidden" id="page-yield">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2 style="margin: 0;">Yield Estimator</h2>
+          <button class="btn-ghost page-close" data-page="yield" title="Close">✕</button>
+        </div>
+        <div class="grid-3">
+          <div>
+            <label class="label">Crop</label>
+            <input id="ye-crop" type="text" placeholder="e.g., tomato" />
+          </div>
+          <div>
+            <label class="label">Avg temp (°C)</label>
+            <input id="ye-temp" type="number" placeholder="e.g., 24" />
+          </div>
+          <div>
+            <label class="label">Rainfall (mm)</label>
+            <input id="ye-rain" type="number" placeholder="e.g., 80" />
+          </div>
+        </div>
+        <button id="ye-run">Estimate</button>
+      </div>
+      <div class="card muted">
+        <h3>Estimate</h3>
+        <div id="ye-result"></div>
+      </div>
+    </section>
+
+    <!-- Feedback -->
+    <section class="page hidden" id="page-feedback">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2 style="margin: 0;">Feedback</h2>
+          <button class="btn-ghost page-close" data-page="feedback" title="Close">✕</button>
+        </div>
+        <div class="row">
+          <button class="btn-ghost" data-fb="up">👍</button>
+          <button class="btn-ghost" data-fb="down">👎</button>
+        </div>
+        <textarea id="fb-notes" rows="4" placeholder="What worked? What didn’t?"></textarea>
+        <button id="fb-save">Save locally</button>
+        <div id="fb-status" class="status"></div>
+      </div>
+      <div class="card muted">
+        <h3>Saved entries (local)</h3>
+        <ul id="fb-list" class="results"></ul>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="page hidden" id="page-settings">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2 style="margin: 0;">Settings</h2>
+          <button class="btn-ghost page-close" data-page="settings" title="Close">✕</button>
+        </div>
+        <p class="muted-note">Settings panel (reserved for future options).</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => { window.AIG.init(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+supabase
+python-dotenv
+ollama
+numpy
+beautifulsoup4
+markdown
+PyPDF2
+unstructured
