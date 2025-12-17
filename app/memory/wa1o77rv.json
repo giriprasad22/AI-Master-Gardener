@@ -1,0 +1,47 @@
+{
+  "summary": "First: what help to grow apple plant / Last: what help to grow apple plant",
+  "facts": {},
+  "tool_traces": [],
+  "messages": [
+    {
+      "role": "user",
+      "content": "what help to grow apple plant",
+      "ts": 1761196042598
+    },
+    {
+      "role": "assistant",
+      "content": "what help to grow apple plant",
+      "ts": 1761196043002
+    },
+    {
+      "role": "user",
+      "content": "tell about apple plant",
+      "ts": 1761196063417
+    },
+    {
+      "role": "assistant",
+      "content": "tell about apple plant",
+      "ts": 1761196063722
+    },
+    {
+      "role": "user",
+      "content": "what are apple plants need",
+      "ts": 1761196204901
+    },
+    {
+      "role": "assistant",
+      "content": "what are apple plants need",
+      "ts": 1761196205169
+    },
+    {
+      "role": "user",
+      "content": "what help to grow apple plant",
+      "ts": 1761196657526
+    },
+    {
+      "role": "assistant",
+      "content": "Which plant? (e.g., tomato)",
+      "ts": 1761196657526
+    }
+  ]
+}

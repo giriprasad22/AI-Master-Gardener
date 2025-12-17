@@ -1,0 +1,32 @@
+{
+  "summary": "First: hi / Last: can tell which is better plants for tomato to increase its yield and decrease th",
+  "facts": {},
+  "tool_traces": [
+    {
+      "tool": "companions",
+      "plant": "tomato"
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "hi",
+      "ts": 1761394747929
+    },
+    {
+      "role": "assistant",
+      "content": "Hello! I'm your agricultural assistant. How can I help you today?",
+      "ts": 1761394871343
+    },
+    {
+      "role": "user",
+      "content": "can tell which is better plants for tomato to increase its yield and decrease the pest",
+      "ts": 1761395843431
+    },
+    {
+      "role": "assistant",
+      "content": "🌿 **Companion Plants for Tomato**\n\n**✅ Beneficial Companions:**\n\"Flower Strips\", Alliums, Asparagus, Barley, Basil, Beans, Bee Balm, Bee Balm (Monarda)\n\n**❌ Avoid Planting With:**\nAlfalfa, Beets, Black Walnut, Blueberries, Brassicas, Chili Peppers, Corn, Corn / Maize\n",
+      "ts": 1761396038683
+    }
+  ]
+}

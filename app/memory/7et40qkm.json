@@ -1,0 +1,22 @@
+{
+  "summary": "First: What grows well with tomatoes? / Last: What grows well with tomatoes?",
+  "facts": {},
+  "tool_traces": [
+    {
+      "tool": "companions",
+      "plant": "tomatoes"
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "What grows well with tomatoes?",
+      "ts": 1762576054777
+    },
+    {
+      "role": "assistant",
+      "content": "🌿 **Companion Plants for Tomatoes**\n\n**✅ Beneficial Companions:**\n\"Flower Strips\", Alliums, Asparagus, Barley, Basil, Beans, Bee Balm, Bee Balm (Monarda)\n\n**❌ Avoid Planting With:**\nAlfalfa, Beets, Black Walnut, Blueberries, Brassicas, Chili Peppers, Corn, Corn / Maize\n",
+      "ts": 1762576134219
+    }
+  ]
+}

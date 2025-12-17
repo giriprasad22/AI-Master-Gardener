@@ -1,0 +1,33 @@
+{
+  "summary": "First: hii what grows well with marigold / Last: my tomato plant is having small pests",
+  "facts": {},
+  "tool_traces": [
+    {
+      "tool": "search",
+      "k": 5,
+      "quality": "no_results"
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "hii what grows well with marigold",
+      "ts": 1762257801222
+    },
+    {
+      "role": "assistant",
+      "content": "Hi there! How can I help with your agriculture questions today?",
+      "ts": 1762257803660
+    },
+    {
+      "role": "user",
+      "content": "my tomato plant is having small pests",
+      "ts": 1762257828652
+    },
+    {
+      "role": "assistant",
+      "content": "ℹ️ *Using general agricultural knowledge (limited KB data)*\n\nI'm having trouble generating a response. Please try again.",
+      "ts": 1762257833105
+    }
+  ]
+}

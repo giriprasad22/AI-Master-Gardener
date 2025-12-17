@@ -1,0 +1,13 @@
+[
+  "degree",
+  "help_degree",
+  "avoid_degree",
+  "net_helpfulness",
+  "help_ratio",
+  "avoid_ratio",
+  "betweenness",
+  "closeness",
+  "clustering",
+  "pagerank",
+  "Avoid_Rank"
+]
