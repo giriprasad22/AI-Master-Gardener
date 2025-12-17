@@ -1,7 +1,0 @@
-pandas 
-numpy 
-networkx 
-matplotlib 
-seaborn 
-altair
-scipy
